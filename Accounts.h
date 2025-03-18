@@ -64,7 +64,7 @@ public:
 		setInterest(0.00);
 	}
 	CheckingsAccount(Customer user, int accNum, double bal, double interest) {
-		
+		setCustomer(user);
 		setAccNum(accNum);
 		setBalance(bal);
 		setInterest(interest);
@@ -104,79 +104,148 @@ public:
 
 //uncomment and fill in other classes as we go, work on one at a time as needed
 
-//class SavingsAccount : public Account {
-//private:
-//
-//public:
-//	SavingsAccount() { //default constructor- initialize to default values
-//		setAccNum(0);
-//		setBalance(0.00);
-//		setInterest(0.00);
-//	}
-//	SavingsAccount() {
-//		setAccNum(accNum);
-//		setBalance(bal);
-//		setInterest(interest);
-//	}
-//	virtual void setAccNum(int acn) {
-//		return accNum;
-//	}
-//	virtual double setBalance(double b) {
-//		return bal;
-//	}
-//	virtual double setInterest(double i) {
-//		return interest;
-//	}
-//};
+class SavingsAccount : public Account {
+private:
 
-//class MoneyMarketAccount : public Account {
-//private:
-//
-//public:
-//	MoneyMarketAccount() { //default constructor- initialize to default values
-//		setAccNum(0);
-//		setBalance(0.00);
-//		setInterest(0.00);
-//	}
-//	MoneyMarketAccount() {
-//		setAccNum(accNum);
-//		setBalance(bal);
-//		setInterest(interest);
-//	}
-//	virtual int setAccNum(int acn) {
-//		return accNum;
-//	}
-//	virtual double setBalance(double b) {
-//		return bal;
-//	}
-//	virtual double setInterest(double i) {
-//		return interest;
-//	}
-//};
+public:
+	SavingsAccount() { //default constructor- initialize to default values
+		setAccNum(0);
+		setBalance(0.00);
+		setInterest(0.00);
+	}
+	SavingsAccount(Customer user, int accNum, double bal, double interest) {
+		setCustomer(user);
+		setAccNum(accNum);
+		setBalance(bal);
+		setInterest(interest);
+	}
+	virtual void addAccount(Customer name) {
+		setCustomer(name);
+		setAccNum(accNum + 1);
+	}
+	void deleteAccount() {
 
-//class CDAccount : public Account {
-//private:
-//
-//public:
-//	CDAccount() { //default constructor- initialize to default values
-//		setAccNum(0);
-//		setBalance(0.00);
-//		setInterest(0.00);
-//	}
-//	CDAccount() {
-//		setAccNum(accNum);
-//		setBalance(bal);
-//		setInterest(interest);
-//	}
-//	virtual int setAccNum(int acn) {
-//		return accNum;
-//	}
-//	virtual double setBalance(double b) {
-//		return bal;
-//	}
-//	virtual double setInterest(double i) {
-//		return interest;
-//	}
-//};
+	}
+	virtual void setCustomer(Customer u) { 
+		user = u;
+	}
+	virtual void setAccNum(int acn) override {
+		accNum = acn;
+	}
+	virtual void setBalance(double b) override {
+		bal = b;
+	}
+	virtual void setInterest(double i) override {
+		interest = i;
+	}
+	virtual Customer getCustomer() const override {
+		return user;
+	}
+	virtual int getAccNum() const override {
+		return accNum;
+	}
+	virtual double getBalance() const override {
+		return bal;
+	}
+	virtual double getInterest() const override {
+		return interest;
+	}
+};
+
+class MoneyMarketAccount : public Account {
+private:
+
+public:
+	MoneyMarketAccount() { //default constructor- initialize to default values
+		setAccNum(0);
+		setBalance(0.00);
+		setInterest(0.00);
+	}
+	MoneyMarketAccount(Customer user, int accNum, double bal, double interest) {
+		setCustomer(user);
+		setAccNum(accNum);
+		setBalance(bal);
+		setInterest(interest);
+	}
+	virtual void addAccount(Customer name) {
+		setCustomer(name);
+		setAccNum(accNum + 1);
+	}
+	void deleteAccount() {
+
+	}
+	virtual void setCustomer(Customer u) {
+		user = u;
+	}
+	virtual void setAccNum(int acn) override {
+		accNum = acn;
+	}
+	virtual void setBalance(double b) override {
+		bal = b;
+	}
+	virtual void setInterest(double i) override {
+		interest = i;
+	}
+	virtual Customer getCustomer() const override {
+		return user;
+	}
+	virtual int getAccNum() const override {
+		return accNum;
+	}
+	virtual double getBalance() const override {
+		return bal;
+	}
+	virtual double getInterest() const override {
+		return interest;
+	}
+};
+
+class CDAccount : public Account {
+private:
+
+public:
+	CDAccount() { //default constructor- initialize to default values
+		setAccNum(0);
+		setBalance(0.00);
+		setInterest(0.00);
+	}
+	CDAccount(Customer user, int accNum, double bal, double interest) {
+		setCustomer(user);
+		setAccNum(accNum);
+		setBalance(bal);
+		setInterest(interest);
+	}
+	virtual void addAccount(Customer name) {
+		setCustomer(name);
+		setAccNum(accNum + 1);
+	}
+	void deleteAccount() {
+
+	}
+	virtual void setCustomer(Customer u) {
+		user = u;
+	}
+	virtual void setAccNum(int acn) override {
+		accNum = acn;
+	}
+	virtual void setBalance(double b) override {
+		bal = b;
+	}
+	virtual void setInterest(double i) override {
+		interest = i;
+	}
+	virtual Customer getCustomer() const override {
+		return user;
+	}
+	virtual int getAccNum() const override {
+		return accNum;
+	}
+	virtual double getBalance() const override {
+		return bal;
+	}
+	virtual double getInterest() const override {
+		return interest;
+	}
+};
 
 #endif

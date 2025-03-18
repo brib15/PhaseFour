@@ -14,7 +14,10 @@ int main() {
 	vector<Customer> customers;
 	vector<shared_ptr<Account>> accounts
 	{
-		make_shared<CheckingsAccount>()
+		make_shared<CheckingsAccount>(),
+		make_shared<SavingsAccount>(),
+		make_shared<MoneyMarketAccount>(),
+		make_shared<CDAccount>()
 	};
 	string fname; string lname;
 
@@ -61,7 +64,7 @@ int main() {
 			char accType;
 			string fname, lname;
 
-			cout << "Enter first and last name of thje account holder: ";
+			cout << "Enter first and last name of the account holder: ";
 			cin >> fname >> lname;
 
 			// Check if customer exists
@@ -91,16 +94,16 @@ int main() {
 			Account* newAccount = nullptr;
 			switch (accType) {
 			case 'C':
-				newAccount = new CheckingsAccount(accNum, balance, interest);
+				newAccount = new CheckingsAccount(accountHolder, accNum, balance, interest);
 				break;
 			case 'S':
-				newAccount = new SavingsAccount(accNum, balance, interest);
+				newAccount = new SavingsAccount(accountHolder, accNum, balance, interest);
 				break;
 			case 'M':
-				newAccount = new MoneyMarketAccount(accNum, balance, interest);
+				newAccount = new MoneyMarketAccount(accountHolder, accNum, balance, interest);
 				break;
 			case 'D':
-				newAccount = new CDAccount(accNum, balance, interest);
+				newAccount = new CDAccount(accountHolder, accNum, balance, interest);
 				break;
 			default:
 				cout << "Invalid account type selected. Try again.\n";
