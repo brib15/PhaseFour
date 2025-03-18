@@ -36,17 +36,22 @@ public:
 
 class Account { //abstract class, pure virtual
 protected:
-	int accNum;
+	Customer user;
+	int accNum = 0000;
 	double bal; 
 	double interest;
 public:
+	virtual void setCustomer(Customer u) = 0;
 	virtual void setAccNum(int accn) = 0;
 	virtual void setBalance(double b) = 0;
 	virtual void setInterest(double i) = 0;
 
+	virtual Customer getCustomer() const = 0;
 	virtual int getAccNum() const = 0;
 	virtual double getBalance() const = 0;
 	virtual double getInterest() const = 0;
+
+	virtual void addAccount(Customer name) = 0;
 };
 
 class CheckingsAccount : public Account {
@@ -58,17 +63,22 @@ public:
 		setBalance(0.00);
 		setInterest(0.00);
 	}
-	CheckingsAccount(int accNum, double bal, double interest) {
+	CheckingsAccount(Customer user, int accNum, double bal, double interest) {
+		
 		setAccNum(accNum);
 		setBalance(bal);
 		setInterest(interest);
 	}
-	/*void addAccount() {
-
+	virtual void addAccount(Customer name) {
+		setCustomer(name);
+		setAccNum(accNum + 1);
 	}
 	void deleteAccount() {
 
-	}*/
+	}
+	virtual void setCustomer(Customer u) { //link to customer
+		user = u;
+	}
 	virtual void setAccNum(int acn) override {
 		accNum = acn;
 	}
@@ -77,6 +87,9 @@ public:
 	}
 	virtual void setInterest(double i) override {
 		interest = i;
+	}
+	virtual Customer getCustomer() const override {
+		return user;
 	}
 	virtual int getAccNum() const override {
 		return accNum;
