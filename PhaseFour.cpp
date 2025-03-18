@@ -112,6 +112,16 @@ int main() {
 				cout << "Account successfully added for " << fname << " " << lname << ".\n";
 			}
 			break;
+
+		}
+		case 'D': // user choose to delete an account
+		{
+			int accNum;
+			cout << "Enter Account number to delete: ";
+			cin >> accNum;
+
+			deleteAccount(accounts, accNum);
+			break;
 		}
 		}
 	} while (choice != 'Q' && choice != 'q');
