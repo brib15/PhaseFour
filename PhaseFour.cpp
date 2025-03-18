@@ -50,6 +50,65 @@ int main() {
 				cout << fname << " " << lname << " was not found." << endl; //otherwise tell user the customer was not in the system
 			}
 		}
+		case 'C': // user chose to add an account
+		{
+			int accNum;
+			double balance, interest;
+			char accType;
+			string fname, lname;
+
+			cout << "Enter first and last name of thje account holder: ";
+			cin >> fname >> lname;
+
+			// Check if customer exists
+			Customer accountHolder(fname, lname);
+			auto custIt = find(customers.begin(), customers.end(), accountHolder);
+
+			if (custIt == customers.end()) {
+				cout << "Customer not found. Please add them first.\n";
+				break;
+			}
+
+			// Ask for account details
+			cout << "Select  account type:\n";
+			cout << "\tC) Checking\n\tS) Savings\n\tM) Money Market\n\tD) CD Account\n";
+			cout << "Enter choice: ";
+			cin >> accType;
+			accType = toupper(accType);
+
+			cout << "Enter Account Number: ";
+			cin >> accNum;
+			cout << "Enter Initial Balance: ";
+			cin >> balance;
+			cout << "Enter Interest Rate: ";
+			cin >> interest;
+
+			// Create the selected account
+			Account* newAccount = nullptr;
+			switch (accType) {
+			case 'C':
+				newAccount = new CheckingsAccount(accNum, balance, interest);
+				break;
+			case 'S':
+				newAccount = new SavingsAccount(accNum, balance, interest);
+				break;
+			case 'M':
+				newAccount = new MoneyMarketAccount(accNum, balance, interest);
+				break;
+			case 'D':
+				newAccount = new CDAccount(accNum, balance, interest);
+				break;
+			default:
+				cout << "Invalid account type selected. Try again.\n";
+				break;
+			}
+
+			if (newAccount) {
+				accounts.push_back(newAccount);  // Store account in vector
+				cout << "Account successfully added for " << fname << " " << lname << ".\n";
+			}
+			break;
+		}
 		}
 	} while (choice != 'Q' && choice != 'q');
 
