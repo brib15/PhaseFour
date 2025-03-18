@@ -12,7 +12,7 @@ public:
 		setFName("");
 		setLName("");
 	}
-	Customer(string fname, string lname) { //constructor
+	Customer(string fname, string lname) { //constructor- initialize to entered values
 		setFName(fname);
 		setLName(lname);
 	}
@@ -28,13 +28,13 @@ public:
 	string getLName() const {
 		return ln;
 	}
-	//fix later
+	//fix later? Apparently needed in order to compare objects
 	bool operator==(Customer name) const {
 		return fn == name.fn && ln == name.ln;
 	}
 };
 
-class Account {
+class Account { //abstract class, pure virtual
 protected:
 	int accNum;
 	double bal; 
@@ -47,28 +47,6 @@ public:
 	virtual int getAccNum() const = 0;
 	virtual double getBalance() const = 0;
 	virtual double getInterest() const = 0;
-
-	//destructor?
-
-	//Account() { //default constructor- initialize to default values
-	//	setAccNum(0);
-	//	setBalance(0.00);
-	//	setInterest(0.00);
-	//}
-	//Account(int an, double b, double i) { //constructor
-	//	setAccNum(accNum);
-	//	setBalance(bal);
-	//	setInterest(interest);
-	//}
-	//virtual int setAccNum(int acn) {
-	//	return accNum;
-	//}
-	//virtual double setBalance(double b) {
-	//	return bal;
-	//}
-	//virtual double setInterest(double i) {
-	//	return interest;
-	//}
 };
 
 class CheckingsAccount : public Account {
@@ -110,6 +88,8 @@ public:
 		return interest;
 	}
 };
+
+//uncomment and fill in other classes as we go, work on one at a time as needed
 
 //class SavingsAccount : public Account {
 //private:
