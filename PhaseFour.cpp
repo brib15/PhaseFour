@@ -1,4 +1,4 @@
-/* Programmers: 
+/* Programmers: Briana Benningfield and Alexis Lua
 * Date: 
 */
 #include <iostream>
