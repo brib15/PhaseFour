@@ -12,6 +12,10 @@ int main() {
 	
 	//vector of customers- could initialize or leave blank
 	vector<Customer> customers;
+	vector<shared_ptr<Account>> accounts
+	{
+		make_shared<CheckingsAccount>()
+	};
 	string fname; string lname;
 
 	//menu for users
@@ -48,6 +52,27 @@ int main() {
 			}
 			else {
 				cout << fname << " " << lname << " was not found." << endl; //otherwise tell user the customer was not in the system
+			}
+		}
+		case 'C': //user chose to add an account
+		{
+			cout << "Enter your name: "; //get name of customer so it can be linked to their account
+			cin >> fname >> lname;
+			//loop through vector and validate that customer does not already exist?
+			Customer chCust(fname, lname); 
+			customers.push_back(chCust); //add customer 
+			cout << "Enter your choice for the type of account you would like to create. " << endl;
+			cout << "\tA) Checkings account \n\tB) Savings account \n\tC) Money Market account \n\tD) Certificate of Deposit account" << endl;
+			char accChoice;
+			cin >> accChoice;
+			switch (toupper(accChoice))
+			{
+			case 'A': //user chose to add a checkings account
+			{
+				auto chAcc = accounts.at(0);
+				chAcc->addAccount(chCust);
+				cout << "A new checkings account for " << fname << " " << lname << " has been created." << endl;
+			}
 			}
 		}
 		}
