@@ -52,6 +52,13 @@ public:
 	virtual double getInterest() const = 0;
 
 	virtual void addAccount(Customer name) = 0;
+
+	//might not need all, but added in case. Can remove later if unnecessary
+	//will need to fill in derived classes
+	virtual void deposit(double dep) = 0;
+	virtual void withdraw(double wd) = 0;
+	virtual void transfer(double tran) = 0;
+	virtual void transaction(double tAct) = 0;
 };
 
 class CheckingsAccount : public Account {
@@ -99,6 +106,18 @@ public:
 	}
 	virtual double getInterest() const override {
 		return interest;
+	}
+	virtual void deposit(double dep) {
+
+	}
+	virtual void withdraw(double wd) {
+
+	}
+	virtual void transfer(double tran) {
+
+	}
+	virtual void transaction(double tAct) {
+
 	}
 };
 
@@ -150,6 +169,18 @@ public:
 	virtual double getInterest() const override {
 		return interest;
 	}
+	virtual void deposit(double dep) {
+
+	}
+	virtual void withdraw(double wd) {
+
+	}
+	virtual void transfer(double tran) {
+
+	}
+	virtual void transaction(double tAct) {
+
+	}
 };
 
 class MoneyMarketAccount : public Account {
@@ -198,6 +229,18 @@ public:
 	virtual double getInterest() const override {
 		return interest;
 	}
+	virtual void deposit(double dep) {
+
+	}
+	virtual void withdraw(double wd) {
+
+	}
+	virtual void transfer(double tran) {
+
+	}
+	virtual void transaction(double tAct) {
+
+	}
 };
 
 class CDAccount : public Account {
@@ -245,6 +288,18 @@ public:
 	}
 	virtual double getInterest() const override {
 		return interest;
+	}
+	virtual void deposit(double dep) {
+
+	}
+	virtual void withdraw(double wd) {
+
+	}
+	virtual void transfer(double tran) {
+
+	}
+	virtual void transaction(double tAct) {
+
 	}
 };
 

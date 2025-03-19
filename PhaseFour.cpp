@@ -10,6 +10,13 @@ using namespace std;
 
 int main() {
 	
+	double checkInt = 0.0002; //checkings account monthly interest rate
+	double savInt = 0.0105; //savings account monthly interest rate
+	double threeMonthCD = 0.0025;//CD account interest rate for three months
+	double sixMonthCD = 0.03; //CD account interest rate for six months
+	double oneYrCD = 0.05; //CD account interest rate for one year
+	double mmInt = 0.0125; //money market account monthly interest rate
+
 	//vector of customers- could initialize or leave blank
 	vector<Customer> customers;
 	vector<shared_ptr<Account>> accounts
@@ -60,7 +67,7 @@ int main() {
 		case 'C': // user chose to add an account
 		{
 			int accNum;
-			double balance, interest;
+			double balance;
 			char accType;
 			string fname, lname;
 
@@ -87,24 +94,41 @@ int main() {
 			cin >> accNum;
 			cout << "Enter Initial Balance: ";
 			cin >> balance;
-			cout << "Enter Interest Rate: ";
-			cin >> interest;
+			/*cout << "Enter Interest Rate: ";
+			cin >> interest;*/
 
 			// Create the selected account
 			Account* newAccount = nullptr;
 			switch (accType) {
 			case 'C':
-				newAccount = new CheckingsAccount(accountHolder, accNum, balance, interest);
+				newAccount = new CheckingsAccount(accountHolder, accNum, balance, checkInt);
 				break;
 			case 'S':
-				newAccount = new SavingsAccount(accountHolder, accNum, balance, interest);
+				newAccount = new SavingsAccount(accountHolder, accNum, balance, savInt);
 				break;
 			case 'M':
-				newAccount = new MoneyMarketAccount(accountHolder, accNum, balance, interest);
+				newAccount = new MoneyMarketAccount(accountHolder, accNum, balance, mmInt);
 				break;
 			case 'D':
-				newAccount = new CDAccount(accountHolder, accNum, balance, interest);
+			{
+				cout << "What length of term would you like to choose? " << endl;
+				cout << "\tA) Three months for a 2.5% interest rate \n\tB) Six months for a 3% interest rate \n\tC) One year for a 5% interest rate" << endl;
+				char term;
+				cin >> term;
+				if (toupper(term) == 'A') {
+					newAccount = new CDAccount(accountHolder, accNum, balance, threeMonthCD);
+				}
+				if (toupper(term) == 'B') {
+					newAccount = new CDAccount(accountHolder, accNum, balance, sixMonthCD);
+				}
+				if (toupper(term) == 'C') {
+					newAccount = new CDAccount(accountHolder, accNum, balance, oneYrCD);
+				}
+				else {
+					cout << "That was not a valid choice. Please try again." << endl;
+				}
 				break;
+			}
 			default:
 				cout << "Invalid account type selected. Try again.\n";
 				break;
