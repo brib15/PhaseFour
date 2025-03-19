@@ -37,17 +37,21 @@ public:
 class Account { //abstract class, pure virtual
 protected:
 	Customer user;
-	int accNum = 0000;
+	static int nextAccountNumber; // Static variable to track the account numbers
+	int accNum; // Auto-incrementing account number
 	double bal; 
 	double interest;
 public:
+	Account() {
+		accNum = nextAccountNumber++; // Assign and increment account number
+	}
+
 	virtual void setCustomer(Customer u) = 0;
-	virtual void setAccNum(int accn) = 0;
 	virtual void setBalance(double b) = 0;
 	virtual void setInterest(double i) = 0;
 
 	virtual Customer getCustomer() const = 0;
-	virtual int getAccNum() const = 0;
+	virtual int getAccNum() const {return accNum; } // Gets the account number
 	virtual double getBalance() const = 0;
 	virtual double getInterest() const = 0;
 
@@ -60,34 +64,33 @@ public:
 	virtual void transfer(double tran) = 0;
 	virtual void transaction(double tAct) = 0;
 };
+// Static variable initialized outside of the class
+int Account::nextAccountNumber = 1000; // Starting accout number (the number can be changed if we want to)
 
 class CheckingsAccount : public Account {
 private:
 
 public:
 	CheckingsAccount() { //default constructor- initialize to default values
-		setAccNum(0);
+		accNum = nextAccountNumber++;
 		setBalance(0.00);
 		setInterest(0.00);
 	}
 	CheckingsAccount(Customer user, int accNum, double bal, double interest) {
 		setCustomer(user);
-		setAccNum(accNum);
+		accNum = nextAccountNumber++;
 		setBalance(bal);
 		setInterest(interest);
 	}
 	virtual void addAccount(Customer name) {
 		setCustomer(name);
-		setAccNum(accNum);
+		accNum = nextAccountNumber++;
 	}
 	void deleteAccount() {
 
 	}
 	virtual void setCustomer(Customer u) { //link to customer
 		user = u;
-	}
-	virtual void setAccNum(int acn) override {
-		accNum = acn;
 	}
 	virtual void setBalance(double b) override {
 		bal = b;
@@ -128,28 +131,25 @@ private:
 
 public:
 	SavingsAccount() { //default constructor- initialize to default values
-		setAccNum(0);
+		accNum = nextAccountNumber++;
 		setBalance(0.00);
 		setInterest(0.00);
 	}
 	SavingsAccount(Customer user, int accNum, double bal, double interest) {
 		setCustomer(user);
-		setAccNum(accNum);
+		accNum = nextAccountNumber++;
 		setBalance(bal);
 		setInterest(interest);
 	}
 	virtual void addAccount(Customer name) {
 		setCustomer(name);
-		setAccNum(accNum + 1);
+		accNum = nextAccountNumber++;
 	}
 	void deleteAccount() {
 
 	}
 	virtual void setCustomer(Customer u) { 
 		user = u;
-	}
-	virtual void setAccNum(int acn) override {
-		accNum = acn;
 	}
 	virtual void setBalance(double b) override {
 		bal = b;
@@ -188,28 +188,25 @@ private:
 
 public:
 	MoneyMarketAccount() { //default constructor- initialize to default values
-		setAccNum(0);
+		accNum = nextAccountNumber++;
 		setBalance(0.00);
 		setInterest(0.00);
 	}
 	MoneyMarketAccount(Customer user, int accNum, double bal, double interest) {
 		setCustomer(user);
-		setAccNum(accNum);
+		accNum = nextAccountNumber++;
 		setBalance(bal);
 		setInterest(interest);
 	}
 	virtual void addAccount(Customer name) {
 		setCustomer(name);
-		setAccNum(accNum + 1);
+		accNum = nextAccountNumber++;
 	}
 	void deleteAccount() {
 
 	}
 	virtual void setCustomer(Customer u) {
 		user = u;
-	}
-	virtual void setAccNum(int acn) override {
-		accNum = acn;
 	}
 	virtual void setBalance(double b) override {
 		bal = b;
@@ -248,28 +245,25 @@ private:
 
 public:
 	CDAccount() { //default constructor- initialize to default values
-		setAccNum(0);
+		accNum = nextAccountNumber++;
 		setBalance(0.00);
 		setInterest(0.00);
 	}
 	CDAccount(Customer user, int accNum, double bal, double interest) {
 		setCustomer(user);
-		setAccNum(accNum);
+		accNum = nextAccountNumber++;
 		setBalance(bal);
 		setInterest(interest);
 	}
 	virtual void addAccount(Customer name) {
 		setCustomer(name);
-		setAccNum(accNum + 1);
+		accNum = nextAccountNumber++;
 	}
 	void deleteAccount() {
 
 	}
 	virtual void setCustomer(Customer u) {
 		user = u;
-	}
-	virtual void setAccNum(int acn) override {
-		accNum = acn;
 	}
 	virtual void setBalance(double b) override {
 		bal = b;
