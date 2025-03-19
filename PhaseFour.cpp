@@ -33,7 +33,7 @@ int main() {
 	cout << "\tA) Add a customer \n\tB) Remove a customer";
 	cout << "\n\tC) Add an account \n\tD) Delete an account";
 	cout << "\n\tE) View accounts \n\tF) View customers" << endl;
-	cout << "\tEnter Q to quit" << endl;
+	cout << "\tG) Manage accounts \n\tEnter Q to quit" << endl;
 
 	char choice; //user choice
 	
@@ -135,7 +135,7 @@ int main() {
 			}
 
 			if (newAccount) {
-				accounts.push_back(newAccount);  // Store account in vector
+				accounts.push_back(shared_ptr<Account>(newAccount));  // Store account in vector
 				cout << "Account successfully added for " << fname << " " << lname << ".\n";
 			}
 			break;
@@ -147,10 +147,15 @@ int main() {
 			cout << "Enter Account number to delete: ";
 			cin >> accNum;
 
-			deleteAccount(accounts, accNum);
+			//deleteAccount(accounts, accNum);
 			break;
 		}
+		case 'E': //user chose to view accounts
+		{
+			cout << "Accounts sorted by balance: " << endl;
+			
 		}
+		}		
 	} while (choice != 'Q' && choice != 'q');
 
 
