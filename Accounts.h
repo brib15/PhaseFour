@@ -78,7 +78,7 @@ public:
 	}
 	virtual void addAccount(Customer name) {
 		setCustomer(name);
-		setAccNum(accNum + 1);
+		setAccNum(accNum);
 	}
 	void deleteAccount() {
 
