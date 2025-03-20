@@ -64,9 +64,8 @@ int main() {
 				cout << fname << " " << lname << " was not found." << endl; //otherwise tell user the customer was not in the system
 			}
 		}
-		case 'C': // user chose to add an account
+		case 'C': // User choose to add an account
 		{
-			int accNum;
 			double balance;
 			char accType;
 			string fname, lname;
@@ -74,9 +73,10 @@ int main() {
 			cout << "Enter first and last name of the account holder: ";
 			cin >> fname >> lname;
 
-			// Check if customer exists
-			Customer accountHolder(fname, lname);
-			auto custIt = find(customers.begin(), customers.end(), accountHolder);
+			// Find customer safely
+			auto custIt = find_if(customers.begin(), customers.end(), [&](const Customer& c) {
+				return c.getFName() == fname && c.getLName() == lname;
+				});
 
 			if (custIt == customers.end()) {
 				cout << "Customer not found. Please add them first.\n";
@@ -84,48 +84,42 @@ int main() {
 			}
 
 			// Ask for account details
-			cout << "Select  account type:\n";
-			cout << "\tC) Checking\n\tS) Savings\n\tM) Money Market\n\tD) CD Account\n";
+			cout << "Select account type:\n";
+			cout << "C) Checking\nS) Savings\nM) Money Market\nD) CD Account\n";
 			cout << "Enter choice: ";
 			cin >> accType;
 			accType = toupper(accType);
 
-			cout << "Enter Account Number: ";
-			cin >> accNum;
 			cout << "Enter Initial Balance: ";
 			cin >> balance;
-			/*cout << "Enter Interest Rate: ";
-			cin >> interest;*/
 
-			// Create the selected account
-			Account* newAccount = nullptr;
+			shared_ptr<Account> newAccount = nullptr;
+
+			// Create the selected account with auto-incremented accNum
 			switch (accType) {
 			case 'C':
-				newAccount = new CheckingsAccount(accountHolder, accNum, balance, checkInt);
+				newAccount = make_shared<CheckingsAccount>(*custIt, balance, checkInt);
 				break;
 			case 'S':
-				newAccount = new SavingsAccount(accountHolder, accNum, balance, savInt);
+				newAccount = make_shared<SavingsAccount>(*custIt, balance, savInt);
 				break;
 			case 'M':
-				newAccount = new MoneyMarketAccount(accountHolder, accNum, balance, mmInt);
+				newAccount = make_shared<MoneyMarketAccount>(*custIt, balance, mmInt);
 				break;
-			case 'D':
-			{
-				cout << "What length of term would you like to choose? " << endl;
-				cout << "\tA) Three months for a 2.5% interest rate \n\tB) Six months for a 3% interest rate \n\tC) One year for a 5% interest rate" << endl;
+			case 'D': {
 				char term;
+				cout << "Choose CD Term:\n";
+				cout << "A) Three months - 2.5%\nB) Six months - 3%\nC) One year - 5%\n";
 				cin >> term;
-				if (toupper(term) == 'A') {
-					newAccount = new CDAccount(accountHolder, accNum, balance, threeMonthCD);
-				}
-				if (toupper(term) == 'B') {
-					newAccount = new CDAccount(accountHolder, accNum, balance, sixMonthCD);
-				}
-				if (toupper(term) == 'C') {
-					newAccount = new CDAccount(accountHolder, accNum, balance, oneYrCD);
-				}
-				else {
-					cout << "That was not a valid choice. Please try again." << endl;
+				term = toupper(term);
+
+				switch (term) {
+				case 'A': newAccount = make_shared<CDAccount>(*custIt, balance, threeMonthCD); break;
+				case 'B': newAccount = make_shared<CDAccount>(*custIt, balance, sixMonthCD); break;
+				case 'C': newAccount = make_shared<CDAccount>(*custIt, balance, oneYrCD); break;
+				default:
+					cout << "Invalid choice. Please try again.\n";
+					break;
 				}
 				break;
 			}
@@ -135,11 +129,10 @@ int main() {
 			}
 
 			if (newAccount) {
-				accounts.push_back(shared_ptr<Account>(newAccount));  // Store account in vector
+				accounts.push_back(newAccount); // Store in vector using `shared_ptr`
 				cout << "Account successfully added for " << fname << " " << lname << ".\n";
 			}
 			break;
-
 		}
 		case 'D': // user choose to delete an account
 		{

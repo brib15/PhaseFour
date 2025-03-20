@@ -76,7 +76,7 @@ public:
 		setBalance(0.00);
 		setInterest(0.00);
 	}
-	CheckingsAccount(Customer user, int accNum, double bal, double interest) {
+	CheckingsAccount(Customer user, double bal, double interest) {
 		setCustomer(user);
 		accNum = nextAccountNumber++;
 		setBalance(bal);
@@ -135,7 +135,7 @@ public:
 		setBalance(0.00);
 		setInterest(0.00);
 	}
-	SavingsAccount(Customer user, int accNum, double bal, double interest) {
+	SavingsAccount(Customer user, double bal, double interest) {
 		setCustomer(user);
 		accNum = nextAccountNumber++;
 		setBalance(bal);
@@ -192,7 +192,7 @@ public:
 		setBalance(0.00);
 		setInterest(0.00);
 	}
-	MoneyMarketAccount(Customer user, int accNum, double bal, double interest) {
+	MoneyMarketAccount(Customer user, double bal, double interest) {
 		setCustomer(user);
 		accNum = nextAccountNumber++;
 		setBalance(bal);
@@ -249,7 +249,7 @@ public:
 		setBalance(0.00);
 		setInterest(0.00);
 	}
-	CDAccount(Customer user, int accNum, double bal, double interest) {
+	CDAccount(Customer user, double bal, double interest) {
 		setCustomer(user);
 		accNum = nextAccountNumber++;
 		setBalance(bal);
