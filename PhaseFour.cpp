@@ -158,6 +158,15 @@ int main() {
 			for (auto& element : accounts)
 				cout << "Account " << element->getAccNum() << " balance: $" << element->getBalance() << endl;
 		}
+		case 'F': //user chose to view customers
+		{
+			cout << "Customers sorted by last name: " << endl;
+			sort(customers.begin(), customers.end(), [](const Customer& cust1, const Customer& cust2) {
+				return cust1.getLName() < cust2.getLName();
+				});
+			for (const auto& element : customers)
+				cout << element.getLName() << endl;
+		}
 		}		
 	} while (choice != 'Q' && choice != 'q');
 
