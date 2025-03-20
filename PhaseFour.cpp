@@ -130,33 +130,27 @@ int main() {
 
 			if (newAccount) {
 				accounts.push_back(newAccount); // Store in vector using `shared_ptr`
-				cout << "Account successfully added for " << fname << " " << lname << ".\n";
+				int showAccNum = newAccount->getAccNum();
+				cout << "Account " << showAccNum << " successfully added for " << fname << " " << lname << ".\n";
 			}
 			break;
 		}
 		case 'D': // user choose to delete an account
 		{
-			int accNum;
-			cout << "Enter Account number to delete: ";
-			cin >> accNum;
-
 			cout << "Enter the number of the account you wish to delete: ";
-			cin >> accNum;
-			//shared_ptr <Account> deleteAcc;
-			//auto it = find(accounts.begin(), accounts.end(), deleteAcc); //look for account object with deleteAcc's initialization
-			//if (it != accounts.end()) { //if value is not at the last location after the last value
-			//	accounts.erase(it); //get rid of object
-			//	cout << "Account " << accNum << " has been removed." << endl; //display sucess
-			//}
-			//else {
-			//	cout << accNum << " was not found." << endl; //otherwise tell user the account was not in the system
-			//}
-
-			shared_ptr<Account>deleteAccount;
-			deleteAccount->getAccNum();
-			auto it = find(accounts.begin(), accounts.end(), deleteAccount);
-
-			//deleteAccount(accounts, accNum);
+			int deleteAccount;
+			cin >> deleteAccount;
+			//find account to delete
+			auto dAccIt = find_if(accounts.begin(), accounts.end(), [&](const shared_ptr<Account>& delAcc) {
+				return delAcc->getAccNum() == deleteAccount; 
+			});
+			if (dAccIt == accounts.end()) { //check its a valid account number
+				cout << "Account does not exist." << endl;
+			}
+			else {
+				accounts.erase(dAccIt); //delete
+				cout << "Account " << deleteAccount << " has been deleted." << endl;
+			}
 			break;
 		}
 		case 'E': //user chose to view accounts

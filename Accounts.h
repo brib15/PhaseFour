@@ -56,7 +56,6 @@ public:
 	virtual double getInterest() const = 0;
 
 	virtual void addAccount(Customer name) = 0;
-	virtual void deleteAccount() = 0;
 
 	//might not need all, but added in case. Can remove later if unnecessary
 	//will need to fill in derived classes
@@ -86,9 +85,6 @@ public:
 	virtual void addAccount(Customer name) {
 		setCustomer(name);
 		accNum = nextAccountNumber++;
-	}
-	void deleteAccount() {
-
 	}
 	virtual void setCustomer(Customer u) { //link to customer
 		user = u;
@@ -146,9 +142,6 @@ public:
 		setCustomer(name);
 		accNum = nextAccountNumber++;
 	}
-	void deleteAccount() {
-
-	}
 	virtual void setCustomer(Customer u) { 
 		user = u;
 	}
@@ -203,9 +196,6 @@ public:
 		setCustomer(name);
 		accNum = nextAccountNumber++;
 	}
-	void deleteAccount() {
-
-	}
 	virtual void setCustomer(Customer u) {
 		user = u;
 	}
@@ -259,9 +249,6 @@ public:
 	virtual void addAccount(Customer name) {
 		setCustomer(name);
 		accNum = nextAccountNumber++;
-	}
-	void deleteAccount() {
-
 	}
 	virtual void setCustomer(Customer u) {
 		user = u;
