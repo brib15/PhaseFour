@@ -140,6 +140,22 @@ int main() {
 			cout << "Enter Account number to delete: ";
 			cin >> accNum;
 
+			cout << "Enter the number of the account you wish to delete: ";
+			cin >> accNum;
+			//shared_ptr <Account> deleteAcc;
+			//auto it = find(accounts.begin(), accounts.end(), deleteAcc); //look for account object with deleteAcc's initialization
+			//if (it != accounts.end()) { //if value is not at the last location after the last value
+			//	accounts.erase(it); //get rid of object
+			//	cout << "Account " << accNum << " has been removed." << endl; //display sucess
+			//}
+			//else {
+			//	cout << accNum << " was not found." << endl; //otherwise tell user the account was not in the system
+			//}
+
+			shared_ptr<Account>deleteAccount;
+			deleteAccount->getAccNum();
+			auto it = find(accounts.begin(), accounts.end(), deleteAccount);
+
 			//deleteAccount(accounts, accNum);
 			break;
 		}
