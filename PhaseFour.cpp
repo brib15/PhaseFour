@@ -25,9 +25,9 @@ int main() {
 
 	//menu for users
 	cout << "Please enter the letter representing your choice." << endl;
-	cout << "\tA) Add a customer \n\tB) Remove a customer";
-	cout << "\n\tC) Add an account \n\tD) Delete an account";
-	cout << "\n\tE) View accounts \n\tF) View customers" << endl;
+	cout << "\tA) Add a customer \n\tB) Remove a customer" << endl;
+	cout << "\tC) Add an account \n\tD) Delete an account" << endl;
+	cout << "\tE) View accounts \n\tF) View customers" << endl;
 	cout << "\tG) Manage accounts \n\tEnter Q to quit" << endl;
 
 	char choice; //user choice
@@ -58,6 +58,7 @@ int main() {
 			else {
 				cout << fname << " " << lname << " was not found." << endl; //otherwise tell user the customer was not in the system
 			}
+			break;
 		}
 		case 'C': // User choose to add an account
 		{
@@ -80,7 +81,7 @@ int main() {
 
 			// Ask for account details
 			cout << "Select account type:\n";
-			cout << "C) Checking\nS) Savings\nM) Money Market\nD) CD Account\n";
+			cout << "\tA) Checking\n\tB) Savings\n\tC) Money Market\n\tD) CD Account\n";
 			cout << "Enter choice: ";
 			cin >> accType;
 			accType = toupper(accType);
@@ -92,19 +93,19 @@ int main() {
 
 			// Create the selected account with auto-incremented accNum
 			switch (accType) {
-			case 'C':
+			case 'A':
 				newAccount = make_shared<CheckingsAccount>(*custIt, balance, checkInt);
 				break;
-			case 'S':
+			case 'B':
 				newAccount = make_shared<SavingsAccount>(*custIt, balance, savInt);
 				break;
-			case 'M':
+			case 'C':
 				newAccount = make_shared<MoneyMarketAccount>(*custIt, balance, mmInt);
 				break;
 			case 'D': {
 				char term;
 				cout << "Choose CD Term:\n";
-				cout << "A) Three months - 2.5%\nB) Six months - 3%\nC) One year - 5%\n";
+				cout << "\tA) Three months - 2.5%\n\tB) Six months - 3%\n\tC) One year - 5%\n";
 				cin >> term;
 				term = toupper(term);
 
@@ -151,7 +152,11 @@ int main() {
 		case 'E': //user chose to view accounts
 		{
 			cout << "Accounts sorted by balance: " << endl;
-			
+				sort(accounts.begin(), accounts.end(), [](const shared_ptr<Account>& accBal1, const shared_ptr<Account>& accBal2) {
+					return accBal1->getBalance() < accBal2->getBalance();
+					});
+			for (auto& element : accounts)
+				cout << "Account " << element->getAccNum() << " balance: $" << element->getBalance() << endl;
 		}
 		}		
 	} while (choice != 'Q' && choice != 'q');
