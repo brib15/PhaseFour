@@ -19,13 +19,8 @@ int main() {
 
 	//vector of customers- could initialize or leave blank
 	vector<Customer> customers;
-	vector<shared_ptr<Account>> accounts
-	{
-		make_shared<CheckingsAccount>(),
-		make_shared<SavingsAccount>(),
-		make_shared<MoneyMarketAccount>(),
-		make_shared<CDAccount>()
-	};
+	vector<shared_ptr<Account>> accounts;
+
 	string fname; string lname;
 
 	//menu for users

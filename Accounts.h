@@ -42,7 +42,7 @@ protected:
 	double bal; 
 	double interest;
 public:
-	Account() {
+	Account() : bal(0.0), interest(0.0) {
 		accNum = nextAccountNumber++; // Assign and increment account number
 	}
 
@@ -71,20 +71,18 @@ class CheckingsAccount : public Account {
 private:
 
 public:
-	CheckingsAccount() { //default constructor- initialize to default values
-		accNum = nextAccountNumber++;
+	CheckingsAccount() : Account() { //default constructor- initialize to default values
+		
 		setBalance(0.00);
 		setInterest(0.00);
 	}
-	CheckingsAccount(Customer user, double bal, double interest) {
+	CheckingsAccount(Customer user, double bal, double interest) : Account() {
 		setCustomer(user);
-		accNum = nextAccountNumber++;
 		setBalance(bal);
 		setInterest(interest);
 	}
 	virtual void addAccount(Customer name) {
 		setCustomer(name);
-		accNum = nextAccountNumber++;
 	}
 	virtual void setCustomer(Customer u) { //link to customer
 		user = u;
@@ -127,20 +125,18 @@ class SavingsAccount : public Account {
 private:
 
 public:
-	SavingsAccount() { //default constructor- initialize to default values
-		accNum = nextAccountNumber++;
+	SavingsAccount() : Account() { //default constructor- initialize to default values
+		
 		setBalance(0.00);
 		setInterest(0.00);
 	}
-	SavingsAccount(Customer user, double bal, double interest) {
+	SavingsAccount(Customer user, double bal, double interest) : Account() {
 		setCustomer(user);
-		accNum = nextAccountNumber++;
 		setBalance(bal);
 		setInterest(interest);
 	}
 	virtual void addAccount(Customer name) {
 		setCustomer(name);
-		accNum = nextAccountNumber++;
 	}
 	virtual void setCustomer(Customer u) { 
 		user = u;
@@ -181,20 +177,19 @@ class MoneyMarketAccount : public Account {
 private:
 
 public:
-	MoneyMarketAccount() { //default constructor- initialize to default values
+	MoneyMarketAccount() : Account() { //default constructor- initialize to default values
 		accNum = nextAccountNumber++;
 		setBalance(0.00);
 		setInterest(0.00);
 	}
-	MoneyMarketAccount(Customer user, double bal, double interest) {
+	MoneyMarketAccount(Customer user, double bal, double interest) : Account() {
 		setCustomer(user);
-		accNum = nextAccountNumber++;
+		
 		setBalance(bal);
 		setInterest(interest);
 	}
 	virtual void addAccount(Customer name) {
 		setCustomer(name);
-		accNum = nextAccountNumber++;
 	}
 	virtual void setCustomer(Customer u) {
 		user = u;
@@ -235,20 +230,18 @@ class CDAccount : public Account {
 private:
 
 public:
-	CDAccount() { //default constructor- initialize to default values
+	CDAccount() : Account() { //default constructor- initialize to default values
 		accNum = nextAccountNumber++;
 		setBalance(0.00);
 		setInterest(0.00);
 	}
-	CDAccount(Customer user, double bal, double interest) {
+	CDAccount(Customer user, double bal, double interest) : Account() {
 		setCustomer(user);
-		accNum = nextAccountNumber++;
 		setBalance(bal);
 		setInterest(interest);
 	}
 	virtual void addAccount(Customer name) {
 		setCustomer(name);
-		accNum = nextAccountNumber++;
 	}
 	virtual void setCustomer(Customer u) {
 		user = u;
