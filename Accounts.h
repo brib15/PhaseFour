@@ -52,6 +52,7 @@ public:
 	virtual double getInterest() const = 0;
 
 	virtual void addAccount(Customer name) = 0;
+	virtual void deleteAccount() = 0;
 
 	//might not need all, but added in case. Can remove later if unnecessary
 	//will need to fill in derived classes
