@@ -50,9 +50,6 @@ int main() {
 			Customer newCust(fname, lname); //creat customer object and initialize with name
 			customers.push_back(newCust); //add customer to vector
 			cout << fname << " " << lname << " has been added as a new customer." << endl; //display message to user saying process was sucessful
-			////write customer to file
-			//bankFile.write(reinterpret_cast<char*> (&newCust), sizeof(newCust));
-			//cout << "Customer has been written to file." << endl;
 			break;
 		}
 		case 'B': //user chose to remove a customer
