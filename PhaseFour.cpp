@@ -35,7 +35,7 @@ int main() {
 	cout << "\tA) Add a customer \n\tB) Remove a customer" << endl;
 	cout << "\tC) Add an account \n\tD) Delete an account" << endl;
 	cout << "\tE) View accounts \n\tF) View customers" << endl;
-	cout << "\tG) Manage accounts \n\tEnter Q to quit" << endl;
+	cout << "\tEnter Q to quit" << endl;
 
 	char choice; //user choice
 
@@ -174,6 +174,11 @@ int main() {
 				});
 			for (const auto& element : customers)
 				cout << element.getLName() << endl;
+			break;
+		}
+		case 'Q': 
+		{
+			cout << "Exiting program" << endl;
 			break;
 		}
 		default:
