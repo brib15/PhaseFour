@@ -176,6 +176,8 @@ int main() {
 				cout << element.getLName() << endl;
 			break;
 		}
+		default:
+			cout << "Invalid choice, please try again." << endl;
 		}
 	} while (choice != 'Q' && choice != 'q');
 
