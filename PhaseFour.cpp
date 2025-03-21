@@ -1,5 +1,5 @@
 /* Programmers: Briana Benningfield and Alexis Lua
-* Date: 
+* Date: 3/21/25
 */
 #include <iostream>
 #include <vector>
@@ -10,9 +10,9 @@ using namespace std;
 
 int main() {
 
-	fstream bankFile;
+	fstream bankFile; //open binary file to hold data
 	bankFile.open("PhaseFourBank.dat", ios::out | ios::binary);
-	if (!bankFile) {
+	if (!bankFile) { //file validation
 		cout << "Error opening file." << endl;
 		return 0;
 	}
@@ -24,7 +24,7 @@ int main() {
 	double oneYrCD = 0.05; //CD account interest rate for one year
 	double mmInt = 0.0125; //money market account monthly interest rate
 
-	//vector of customers- could initialize or leave blank
+	//vectors to hold customers and accounts
 	vector<Customer> customers;
 	vector<shared_ptr<Account>> accounts;
 
@@ -162,8 +162,8 @@ int main() {
 			sort(accounts.begin(), accounts.end(), [](const shared_ptr<Account>& accBal1, const shared_ptr<Account>& accBal2) {
 				return accBal1->getBalance() < accBal2->getBalance();
 				});
-			for (auto& element : accounts)
-				cout << "Account " << element->getAccNum() << " balance: $" << element->getBalance() << endl;
+			for (auto& element : accounts) //display each individual account info
+				cout << "Account " << element->getAccNum() << "\tBalance: $" << element->getBalance() << "\tInterest: " << element->getInterest() << endl;
 			break;
 		}
 		case 'F': //user chose to view customers

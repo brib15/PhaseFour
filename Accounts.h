@@ -28,7 +28,6 @@ public:
 	string getLName() const {
 		return ln;
 	}
-	//fix later? Apparently needed in order to compare objects
 	bool operator==(Customer name) const {
 		return fn == name.fn && ln == name.ln;
 	}
