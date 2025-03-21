@@ -9,7 +9,14 @@
 using namespace std;
 
 int main() {
-	
+
+	fstream bankFile;
+	bankFile.open("PhaseFourBank.dat", ios::out | ios::binary);
+	if (!bankFile) {
+		cout << "Error opening file." << endl;
+		return 0;
+	}
+
 	double checkInt = 0.0002; //checkings account monthly interest rate
 	double savInt = 0.0105; //savings account monthly interest rate
 	double threeMonthCD = 0.0025;//CD account interest rate for three months
@@ -31,8 +38,8 @@ int main() {
 	cout << "\tG) Manage accounts \n\tEnter Q to quit" << endl;
 
 	char choice; //user choice
-	
-	do{
+
+	do {
 		cout << "Enter choice here: ";
 		cin >> choice;
 		switch (toupper(choice)) {
@@ -43,12 +50,12 @@ int main() {
 			Customer newCust(fname, lname); //creat customer object and initialize with name
 			customers.push_back(newCust); //add customer to vector
 			cout << fname << " " << lname << " has been added as a new customer." << endl; //display message to user saying process was sucessful
-			break; 
+			break;
 		}
 		case 'B': //user chose to remove a customer
 		{
 			cout << "Enter first and last name of the customer you wish to remove: ";
-			cin >> fname >> lname; 
+			cin >> fname >> lname;
 			Customer removeCust(fname, lname);
 			auto it = find(customers.begin(), customers.end(), removeCust); //look for customer object with removeCust's initialization
 			if (it != customers.end()) { //if value is not at the last location after the last value
@@ -138,8 +145,8 @@ int main() {
 			cin >> deleteAccount;
 			//find account to delete
 			auto dAccIt = find_if(accounts.begin(), accounts.end(), [&](const shared_ptr<Account>& delAcc) {
-				return delAcc->getAccNum() == deleteAccount; 
-			});
+				return delAcc->getAccNum() == deleteAccount;
+				});
 			if (dAccIt == accounts.end()) { //check its a valid account number
 				cout << "Account does not exist." << endl;
 			}
@@ -152,11 +159,12 @@ int main() {
 		case 'E': //user chose to view accounts
 		{
 			cout << "Accounts sorted by balance: " << endl;
-				sort(accounts.begin(), accounts.end(), [](const shared_ptr<Account>& accBal1, const shared_ptr<Account>& accBal2) {
-					return accBal1->getBalance() < accBal2->getBalance();
-					});
+			sort(accounts.begin(), accounts.end(), [](const shared_ptr<Account>& accBal1, const shared_ptr<Account>& accBal2) {
+				return accBal1->getBalance() < accBal2->getBalance();
+				});
 			for (auto& element : accounts)
 				cout << "Account " << element->getAccNum() << " balance: $" << element->getBalance() << endl;
+			break;
 		}
 		case 'F': //user chose to view customers
 		{
@@ -166,10 +174,53 @@ int main() {
 				});
 			for (const auto& element : customers)
 				cout << element.getLName() << endl;
+			break;
 		}
-		}		
+		}
 	} while (choice != 'Q' && choice != 'q');
 
+	size_t custSize = customers.size();
+	bankFile.write((char*)&custSize, sizeof(custSize));
+
+	for (auto& cust : customers) {
+		size_t fnSize = cust.getFName().size();
+		size_t lnSize = cust.getLName().size();
+
+		bankFile.write((char*)&fnSize, sizeof(fnSize));
+		bankFile.write(cust.getFName().c_str(), fnSize);
+		bankFile.write((char*)&lnSize, sizeof(lnSize));
+		bankFile.write(cust.getLName().c_str(), lnSize);
+	}
+
+
+	size_t accSize = accounts.size();
+	bankFile.write((char*)&accSize, sizeof(accSize));
+
+	for (auto& acc : accounts) {
+		//get account information- number, balance, owner, interest
+		int aNum = acc->getAccNum();
+		double accBal = acc->getBalance();
+		double aInt = acc->getInterest();
+		Customer aC = acc->getCustomer();
+		string custFN = aC.getFName();
+		string custLN = aC.getLName();
+
+		//write account info to file
+		bankFile.write((char*)&aNum, sizeof(aNum)); //acount number
+		bankFile.write((char*)&accBal, sizeof(accBal)); //account balance
+		bankFile.write((char*)&aInt, sizeof(aInt)); //account interest
+		size_t sizeCustFN = custFN.size(); //size of customer's first name
+		size_t sizeCustLN = custLN.size(); //size of customer's last name
+
+		//write customer's first name to file
+		bankFile.write((char*)&sizeCustFN, sizeof(sizeCustFN));
+		bankFile.write(custFN.c_str(), sizeCustFN);
+		//write customer's last name to file
+		bankFile.write((char*)&sizeCustLN, sizeof(sizeCustLN));
+		bankFile.write(custLN.c_str(), sizeCustLN);
+	}
+
+	bankFile.close();
 
 	return 0;
 }
