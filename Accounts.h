@@ -56,20 +56,11 @@ public:
 	virtual double getInterest() const = 0;
 
 	virtual void addAccount(Customer name) = 0;
-
-	//might not need all, but added in case. Can remove later if unnecessary
-	//will need to fill in derived classes
-	virtual void deposit(double dep) = 0;
-	virtual void withdraw(double wd) = 0;
-	virtual void transfer(double tran) = 0;
-	virtual void transaction(double tAct) = 0;
 };
 // Static variable initialized outside of the class
 int Account::nextAccountNumber = 1000; // Starting accout number (the number can be changed if we want to)
 
 class CheckingsAccount : public Account {
-private:
-
 public:
 	CheckingsAccount() : Account() { //default constructor- initialize to default values
 		
@@ -105,25 +96,9 @@ public:
 	virtual double getInterest() const override {
 		return interest;
 	}
-	virtual void deposit(double dep) {
-
-	}
-	virtual void withdraw(double wd) {
-
-	}
-	virtual void transfer(double tran) {
-
-	}
-	virtual void transaction(double tAct) {
-
-	}
 };
 
-//uncomment and fill in other classes as we go, work on one at a time as needed
-
 class SavingsAccount : public Account {
-private:
-
 public:
 	SavingsAccount() : Account() { //default constructor- initialize to default values
 		
@@ -159,23 +134,9 @@ public:
 	virtual double getInterest() const override {
 		return interest;
 	}
-	virtual void deposit(double dep) {
-
-	}
-	virtual void withdraw(double wd) {
-
-	}
-	virtual void transfer(double tran) {
-
-	}
-	virtual void transaction(double tAct) {
-
-	}
 };
 
 class MoneyMarketAccount : public Account {
-private:
-
 public:
 	MoneyMarketAccount() : Account() { //default constructor- initialize to default values
 		accNum = nextAccountNumber++;
@@ -212,23 +173,9 @@ public:
 	virtual double getInterest() const override {
 		return interest;
 	}
-	virtual void deposit(double dep) {
-
-	}
-	virtual void withdraw(double wd) {
-
-	}
-	virtual void transfer(double tran) {
-
-	}
-	virtual void transaction(double tAct) {
-
-	}
 };
 
 class CDAccount : public Account {
-private:
-
 public:
 	CDAccount() : Account() { //default constructor- initialize to default values
 		accNum = nextAccountNumber++;
@@ -263,18 +210,6 @@ public:
 	}
 	virtual double getInterest() const override {
 		return interest;
-	}
-	virtual void deposit(double dep) {
-
-	}
-	virtual void withdraw(double wd) {
-
-	}
-	virtual void transfer(double tran) {
-
-	}
-	virtual void transaction(double tAct) {
-
 	}
 };
 
